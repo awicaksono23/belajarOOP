@@ -1,15 +1,31 @@
 <?php 
 //Nilai static akan selalu tetap meskipun object di instansiasi berulang kali
-
+//cara memanggil static : Class::function();
 class contohStatic{
-	public static $harga = 50; //ketika objek baru di instansiasi nilai akan berulang 50 50 50 50 50 ($this->)
+	public $harga = 50; //ketika objek baru di instansiasi nilai akan berulang 50 50 50 50 50 ($this->)
 	public static $no = 1; //ketika objek baru di instansiasi nilai akan tetap 1 2 3 4 5 (self::)
 
-	public static function hallo(){
-		return self::$no++." Hallo my name is ".self::$harga;
+	public function hallo(){
+		return self::$no++." Hallo my name is ".$this->harga;
 	}
 
+	public
 }
- 
-echo contohStatic::hallo();
+
+$obj = new contohStatic();
+echo $obj->hallo(); //tanpa instansiasi objek
+echo "<br>"; 
+echo $obj->hallo(); //tanpa instansiasi objek
+echo "<br>"; 
+echo $obj->hallo(); //tanpa instansiasi objek
+echo "<br>"; 
+
+$obj1 = new contohStatic();
+echo $obj1->hallo(); //tanpa instansiasi objek
+echo "<br>"; 
+echo $obj1->hallo(); //tanpa instansiasi objek
+echo "<br>"; 
+echo $obj1->hallo(); //tanpa instansiasi objek
+echo "<br>"; 
+echo contohStatic::hallo()
  ?>

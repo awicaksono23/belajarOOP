@@ -5,12 +5,11 @@
 //untung menghindari bug atau agar org lain tidak dapat mengubah" nilai dari sebuah property 
 
 class Produk{
-	protected $judul,
+	private $judul,
 		   $penulis,
-		   $penerbit;
- 	
- 	protected $diskon = 0;
-	private $harga;
+		   $penerbit,
+ 		   $diskon = 0,
+		   $harga;
 
 	public function __construct($judul = "Judul", $penulis = "Penulis", $penerbit = "Penerbit", $harga = 0){
 		$this->judul = $judul;
@@ -37,7 +36,7 @@ class Produk{
 }
 
 class Komik extends Produk {
-	public $jmlHalaman;
+	private $jmlHalaman;
 	public function __construct($judul = "Judul", $penulis = "Penulis", $penerbit = "Penerbit", $harga = 0, $jmlHalaman = 0){
 		parent::__construct($judul, $penulis, $penerbit, $harga);
 		$this->jmlHalaman = $jmlHalaman;
@@ -52,10 +51,10 @@ class Komik extends Produk {
 }
 
 class Game extends Produk {
-	public $waktuMain;
+	private $waktuMain;
 	public function __construct($judul = "Judul", $penulis = "Penulis", $penerbit = "Penerbit", $harga = 0, $waktuMain = 0){
 		parent::__construct($judul, $penulis, $penerbit, $harga);
-		$this->waktuMain = $waktuMain;
+		$this->waktuMain = $waktuMain; 
 	} 
 	public function getInfoProduk(){
 		$str = "Game: ".parent::getInfoProduk(). " ~ $this->waktuMain Jam."; 
@@ -64,26 +63,17 @@ class Game extends Produk {
 }
 
 class cetakInfoProduk {
+	public $daftarProduk = ();
+
 	public function cetak( Produk $produk){ //menggunakan kelas lain harus mendeklarasikan Class lain disebelah property
-		$str = "{$produk->getLabel()}, $produk->harga";
+		$str = "{$produk->getLabel()}, {$produk->getHarga()}";
 		return $str;
 	}
+	
 }
 
 $produk1 = new Komik("Boruto","Matsuyama","Gramedia",25000,100);
 $produk2 = new Game("One Piece","Matsuyama","LK21",40000,2);
 
-echo $produk1->getInfoProduk();
-echo "<br>";
-echo $produk2->getInfoProduk();
-echo "<br>";
-// $produk3 = new cetakInfoProduk();
-// echo $produk3->cetak($produk1);
-echo "<hr>";
 
-$produk4 = new Produk("aaa","bbb","ccc",100000);
-$produk4->setDiskon(50);
-echo $produk4->getInfoProduk();
-echo "<br>";
-echo "Diskon menjadi ".$produk4->getHarga();
 ?>

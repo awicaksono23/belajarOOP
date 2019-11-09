@@ -4,8 +4,13 @@
 //minimal memiliki 1 method abstrak
 
 //jika produk tidak akan di instansiasi menjadi objek maka buat saja abstrak
+
+interface InfoProduk{
+	public function getInfoProduk();
+}
+
 Abstract class Produk{
-	private $judul,
+	protected $judul,
 		   $penulis,
 		   $penerbit,
  		   $diskon = 0,
@@ -26,37 +31,46 @@ Abstract class Produk{
 		return "$this->judul, $this->penulis";
 	}
 
-	abstract public function getInfoProduk(); //harus ada minimal 1 method di induk class
-
-	public function getInfo(){
-		$str = " {$this->getLabel()}, $this->penerbit, (Rp. $this->harga)"; 
-		return $str;	
-	}
+	abstract public function getInfo();
+	
 	public function setDiskon($diskon){
 		return $this->diskon = $diskon;
 	}
 }
 
-class Komik extends Produk {
+class Komik extends Produk implements InfoProduk {
 	private $jmlHalaman;
 	public function __construct($judul = "Judul", $penulis = "Penulis", $penerbit = "Penerbit", $harga = 0, $jmlHalaman = 0){
 		parent::__construct($judul, $penulis, $penerbit, $harga);
 		$this->jmlHalaman = $jmlHalaman;
 	}
+
+	//getInfoProduk menggambil dari Implement Class
 	public function getInfoProduk(){
 		$str = "Komik: ".$this->getInfo(). " $this->jmlHalaman Halaman."; 
 		return $str;
 	}
+
+	//getInfoProduk menggambil dari Abstract Class
+	public function getInfo(){ 
+		$str = " {$this->getLabel()}, $this->penerbit, (Rp. $this->harga)"; 
+		return $str;	
+	}
+
 	public function getJudul(){
 		return $this->judul;
 	}
 }
 
-class Game extends Produk {
+class Game extends Produk implements InfoProduk {
 	private $waktuMain;
 	public function __construct($judul = "Judul", $penulis = "Penulis", $penerbit = "Penerbit", $harga = 0, $waktuMain = 0){
 		parent::__construct($judul, $penulis, $penerbit, $harga);
 		$this->waktuMain = $waktuMain; 
+	}
+	public function getInfo(){
+		$str = " {$this->getLabel()}, $this->penerbit, (Rp. $this->harga)"; 
+		return $str;	
 	} 
 	public function getInfoProduk(){
 		$str = "Game: ".$this->getInfo(). " ~ $this->waktuMain Jam."; 

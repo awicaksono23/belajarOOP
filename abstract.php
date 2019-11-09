@@ -18,7 +18,7 @@ abstract class Buah{
 }
 
 class Pisang extends Buah{
-
+                                                                       
 	public function makan(){
 		$this->setWarna("Kuning");
 		$str = "Ini adalah buah ".__CLASS__." dan berwarna : {$this->getWarna()} ";
@@ -36,10 +36,18 @@ class Apel extends Buah{
 	}
 }
 
- 
+
 $buah1 = new Pisang();
 echo $buah1->makan();
 
 $buah2 = new Apel();
 echo $buah2->makan();
+
+/*
+-di dalam Abstrak class dapat membuat property namun di Interface tidak bisa
+-kelas yang tidak bisa di instansiasi, harus dari kelas turunan
+-setiap kelas turunan harus memiliki method yang ada di kelas induk abstrak
+*/
+
 ?>
+

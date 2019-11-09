@@ -43,6 +43,7 @@ class Komik extends Produk {
 		$this->jmlHalaman = $jmlHalaman;
 	}
 	public function getInfoProduk(){
+		//karna nama method nya sama seperti induk, dan ingin memanggil method induk maka menggunakan parent::
 		$str = "Komik: ".parent::getInfoProduk(). " $this->jmlHalaman Halaman."; 
 		return $str;
 	}
@@ -55,7 +56,7 @@ class Game extends Produk {
 	public $waktuMain;
 	public function __construct($judul = "Judul", $penulis = "Penulis", $penerbit = "Penerbit", $harga = 0, $waktuMain = 0){
 		parent::__construct($judul, $penulis, $penerbit, $harga);
-		$this->waktuMain = $waktuMain;
+		$this->waktuMain = $waktuMain; 
 	} 
 	public function getInfoProduk(){
 		$str = "Game: ".parent::getInfoProduk(). " ~ $this->waktuMain Jam."; 
